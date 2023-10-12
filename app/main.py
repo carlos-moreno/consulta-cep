@@ -26,7 +26,7 @@ async def cep_not_found_handler(request: Request, exc: CepNotFoundException):
 
 
 @app.get("/address/{cep}", response_model=schemas.AddressOutput)
-async def search_adderss_by_cep(cep: str = Path(max_length=8, min_length=8)):
+async def search_address_by_cep(cep: str = Path(max_length=8, min_length=8)):
     address = app.db.find_one({"cep": f"{cep[:5]}-{cep[5:]}"})
 
     if not address:
