@@ -1,0 +1,6 @@
+fastapi
+pymongo
+requests
+pytest
+pytest-asyncio
+httpx
