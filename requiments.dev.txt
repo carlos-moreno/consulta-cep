@@ -1,0 +1,14 @@
+# Dev dependencies
+ipdb
+ipython
+pudb
+pip-tools
+
+# Code quality
+flake8
+pyproject-flake8
+black
+isort
+
+# Build
+wheel

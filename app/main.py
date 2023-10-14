@@ -1,11 +1,9 @@
 import requests
-
+from bootstrap import mongodb
 from fastapi import FastAPI, Path, Request
 from fastapi.responses import JSONResponse
 
 from app import schemas
-from bootstrap import mongodb
-
 
 app = FastAPI()
 mongodb.install(app)
@@ -15,14 +13,15 @@ class CepNotFoundException(Exception):
     pass
 
 
-
 async def save_address(address: dict):
     app.db.insert_one(address)
 
 
 @app.exception_handler(CepNotFoundException)
 async def cep_not_found_handler(request: Request, exc: CepNotFoundException):
-    return JSONResponse(status_code=404, content={"message": "Cep não encontrado"})
+    return JSONResponse(
+        status_code=404, content={"message": "Cep não encontrado"}
+    )
 
 
 @app.get("/address/{cep}", response_model=schemas.AddressOutput)

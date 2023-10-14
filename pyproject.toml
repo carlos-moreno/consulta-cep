@@ -1,0 +1,37 @@
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q -vv"
+testpaths = [
+    "tests",
+]
+
+
+[tool.flake8]
+exclude = [
+    ".venv",
+    "build",
+    "migrations",
+]
+max-line-length = 79
+
+
+[tool.black]
+line-length = 79
+target-version = ["py310"]
+exclude = '''
+/(
+    \.eggs
+    | \.git
+    | \.venv
+    | _build
+    | build
+    | dist
+    | migrations
+)/
+'''
+
+
+[tool.isort]
+profile = "black"
+src_paths = ["app", "tests"]
+multi_line_output = 3
