@@ -1,4 +1,4 @@
-.PHONY: install virtualenv ipython lint fmt test clean build
+.PHONY: install virtualenv ipython run lint fmt test clean build
 
 
 install:
@@ -12,6 +12,10 @@ virtualenv:
 
 ipython:
 	@.venv/bin/ipython
+
+
+run:
+	@uvicorn app.main:app --reload
 
 
 lint:
