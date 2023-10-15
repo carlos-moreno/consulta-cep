@@ -24,9 +24,14 @@ async def cep_not_found_handler(request: Request, exc: CepNotFoundException):
     )
 
 
-@app.get("/address/{cep}", response_model=schemas.AddressOutput)
-async def search_address_by_cep(cep: str = Path(max_length=8, min_length=8)):
-    address = app.db.find_one({"cep": f"{cep[:5]}-{cep[5:]}"})
+@app.get("/address/{cep}", response_model=schemas.AddressOutput, tags=["search"])
+async def search_address_by_cep(cep: str = Path(max_length=9, min_length=9)):
+    """Search for an address according to the zip code entered
+
+    The format used for the query must be:
+    > `99999-999`
+    """
+    address = app.db.find_one({"cep": cep})
 
     if not address:
         response = requests.get(f"http://viacep.com.br/ws/{cep}/json/")
